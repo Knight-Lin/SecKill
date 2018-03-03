@@ -10,7 +10,7 @@
 	<update id="reduceNumber">
 	update seckill
 	set number=number-1
-	where seckill_id=#{seckill}
+	where seckill_id=#{seckillId}
 		  and start_time
 		  <![CDATA[
 		  <=
@@ -34,8 +34,16 @@
 		order by create_time desc
 		limit #{offset},#{limit}
 	</select>
-
-
+	<!-- mybatis调用存储过程 -->
+	<select id="killByProcedure" statementType="CALLABLE">
+	<!-- IN,OUT,BIGINT等要大写，因为是常量 -->
+		call execute_seckill(
+		#{seckillId,jdbcType=BIGINT,mode=IN},
+		#{userPhone,jdbcType=BIGINT,mode=IN},
+		#{killTime,jdbcType=TIMESTAMP,mode=IN},
+		#{result,jdbcType=INTEGER,mode=OUT}
+		)
+	</select>
 
 
 

@@ -1,5 +1,7 @@
 package com.seckill.dto;
 
+import java.io.Serializable;
+
 import com.seckill.entity.SuccessKilled;
 import com.seckill.enums.SeckillStateEnum;
 
@@ -8,7 +10,11 @@ import com.seckill.enums.SeckillStateEnum;
  * @author Administrator
  *
  */
-public class SeckillExecution {
+public class SeckillExecution implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4824039447507835345L;
 	private long seckillId;
 	private int state;
 	private String stateInfo;
@@ -27,6 +33,14 @@ public class SeckillExecution {
 		this.seckillId = seckillId;
 		this.state = state;
 		this.stateInfo = stateInfo;
+	}
+
+
+
+	public SeckillExecution(Long seckillId, SeckillStateEnum state) {
+		this.seckillId = seckillId;
+		this.state = state.getState();
+		this.stateInfo = state.getStateInfo();
 	}
 
 
@@ -61,6 +75,14 @@ public class SeckillExecution {
 
 	public void setSuccessKilled(SuccessKilled successKilled) {
 		this.successKilled = successKilled;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "SeckillExecution [seckillId=" + seckillId + ", state=" + state + ", stateInfo=" + stateInfo
+				+ ", successKilled=" + successKilled + "]";
 	}
 	
 	
